@@ -30,8 +30,8 @@ function Jadwal() {
       const today = new Date();
       const monday = new Date(today);
       monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-      const saturday = new Date(monday);
-      saturday.setDate(monday.getDate() + 5);
+      const sunday = new Date(monday);
+      sunday.setDate(monday.getDate() + 6);
       const { data } = await supabase
         .from("bookings").select("*")
         .gte("date", toISODate(monday))
