@@ -14,7 +14,6 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/lapor")({ component: Lapor });
 
 const CATEGORIES = ["Kerusakan Perangkat", "Kehilangan", "Pelanggaran", "Saran", "Lainnya"];
-const CLASSES = ["X-A", "X-B", "X-C", "XI-A", "XI-B", "XI-C", "XII-A", "XII-B", "XII-C"];
 
 function Lapor() {
   const [form, setForm] = useState({ student_name: "", class: "", category: "", content: "" });
