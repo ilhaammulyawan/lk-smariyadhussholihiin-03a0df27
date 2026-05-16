@@ -78,7 +78,7 @@ function Beranda() {
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-brand to-accent2 rounded-3xl blur opacity-30" />
               <img
-                src={heroImg}
+                src={settings?.hero_image_url || heroImg}
                 alt="Lab Komputer SMA Riyadhussholihiin"
                 width={1280}
                 height={1024}
