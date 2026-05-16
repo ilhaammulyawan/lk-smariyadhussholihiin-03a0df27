@@ -35,7 +35,7 @@ function Jadwal() {
       const { data } = await supabase
         .from("bookings").select("*")
         .gte("date", toISODate(monday))
-        .lte("date", toISODate(saturday))
+        .lte("date", toISODate(sunday))
         .in("status", ["pending", "approved"]);
       return data ?? [];
     },
