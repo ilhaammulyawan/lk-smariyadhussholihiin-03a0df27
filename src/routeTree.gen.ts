@@ -17,7 +17,16 @@ import { Route as InformasiRouteImport } from './routes/informasi'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminDashboardIndexRouteImport } from './routes/admin/dashboard/index'
+import { Route as AdminDashboardPengaturanRouteImport } from './routes/admin/dashboard/pengaturan'
+import { Route as AdminDashboardLaporanRouteImport } from './routes/admin/dashboard/laporan'
+import { Route as AdminDashboardKontenRouteImport } from './routes/admin/dashboard/konten'
+import { Route as AdminDashboardJadwalRouteImport } from './routes/admin/dashboard/jadwal'
+import { Route as AdminDashboardBookingRouteImport } from './routes/admin/dashboard/booking'
+import { Route as AdminDashboardBeritaRouteImport } from './routes/admin/dashboard/berita'
 
 const ProfilRoute = ProfilRouteImport.update({
   id: '/profil',
@@ -59,10 +68,56 @@ const BeritaIndexRoute = BeritaIndexRouteImport.update({
   path: '/berita/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BeritaSlugRoute = BeritaSlugRouteImport.update({
   id: '/berita/$slug',
   path: '/berita/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardIndexRoute = AdminDashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardPengaturanRoute =
+  AdminDashboardPengaturanRouteImport.update({
+    id: '/pengaturan',
+    path: '/pengaturan',
+    getParentRoute: () => AdminDashboardRoute,
+  } as any)
+const AdminDashboardLaporanRoute = AdminDashboardLaporanRouteImport.update({
+  id: '/laporan',
+  path: '/laporan',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardKontenRoute = AdminDashboardKontenRouteImport.update({
+  id: '/konten',
+  path: '/konten',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardJadwalRoute = AdminDashboardJadwalRouteImport.update({
+  id: '/jadwal',
+  path: '/jadwal',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardBookingRoute = AdminDashboardBookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
+const AdminDashboardBeritaRoute = AdminDashboardBeritaRouteImport.update({
+  id: '/berita',
+  path: '/berita',
+  getParentRoute: () => AdminDashboardRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -73,8 +128,17 @@ export interface FileRoutesByFullPath {
   '/lapor': typeof LaporRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
+  '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
+  '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
+  '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
+  '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
+  '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
+  '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -85,7 +149,15 @@ export interface FileRoutesByTo {
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
+  '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
+  '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
+  '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
+  '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
+  '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
+  '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,8 +168,17 @@ export interface FileRoutesById {
   '/lapor': typeof LaporRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
+  '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
+  '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
+  '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
+  '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
+  '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
+  '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,8 +190,17 @@ export interface FileRouteTypes {
     | '/lapor'
     | '/peraturan'
     | '/profil'
+    | '/admin/dashboard'
     | '/berita/$slug'
+    | '/admin/'
     | '/berita/'
+    | '/admin/dashboard/berita'
+    | '/admin/dashboard/booking'
+    | '/admin/dashboard/jadwal'
+    | '/admin/dashboard/konten'
+    | '/admin/dashboard/laporan'
+    | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -121,7 +211,15 @@ export interface FileRouteTypes {
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
+    | '/admin'
     | '/berita'
+    | '/admin/dashboard/berita'
+    | '/admin/dashboard/booking'
+    | '/admin/dashboard/jadwal'
+    | '/admin/dashboard/konten'
+    | '/admin/dashboard/laporan'
+    | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard'
   id:
     | '__root__'
     | '/'
@@ -131,8 +229,17 @@ export interface FileRouteTypes {
     | '/lapor'
     | '/peraturan'
     | '/profil'
+    | '/admin/dashboard'
     | '/berita/$slug'
+    | '/admin/'
     | '/berita/'
+    | '/admin/dashboard/berita'
+    | '/admin/dashboard/booking'
+    | '/admin/dashboard/jadwal'
+    | '/admin/dashboard/konten'
+    | '/admin/dashboard/laporan'
+    | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,7 +250,9 @@ export interface RootRouteChildren {
   LaporRoute: typeof LaporRoute
   PeraturanRoute: typeof PeraturanRoute
   ProfilRoute: typeof ProfilRoute
+  AdminDashboardRoute: typeof AdminDashboardRouteWithChildren
   BeritaSlugRoute: typeof BeritaSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   BeritaIndexRoute: typeof BeritaIndexRoute
 }
 
@@ -205,6 +314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BeritaIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/berita/$slug': {
       id: '/berita/$slug'
       path: '/berita/$slug'
@@ -212,8 +328,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BeritaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/admin/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard/': {
+      id: '/admin/dashboard/'
+      path: '/'
+      fullPath: '/admin/dashboard/'
+      preLoaderRoute: typeof AdminDashboardIndexRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/pengaturan': {
+      id: '/admin/dashboard/pengaturan'
+      path: '/pengaturan'
+      fullPath: '/admin/dashboard/pengaturan'
+      preLoaderRoute: typeof AdminDashboardPengaturanRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/laporan': {
+      id: '/admin/dashboard/laporan'
+      path: '/laporan'
+      fullPath: '/admin/dashboard/laporan'
+      preLoaderRoute: typeof AdminDashboardLaporanRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/konten': {
+      id: '/admin/dashboard/konten'
+      path: '/konten'
+      fullPath: '/admin/dashboard/konten'
+      preLoaderRoute: typeof AdminDashboardKontenRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/jadwal': {
+      id: '/admin/dashboard/jadwal'
+      path: '/jadwal'
+      fullPath: '/admin/dashboard/jadwal'
+      preLoaderRoute: typeof AdminDashboardJadwalRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/booking': {
+      id: '/admin/dashboard/booking'
+      path: '/booking'
+      fullPath: '/admin/dashboard/booking'
+      preLoaderRoute: typeof AdminDashboardBookingRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/berita': {
+      id: '/admin/dashboard/berita'
+      path: '/berita'
+      fullPath: '/admin/dashboard/berita'
+      preLoaderRoute: typeof AdminDashboardBeritaRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
   }
 }
+
+interface AdminDashboardRouteChildren {
+  AdminDashboardBeritaRoute: typeof AdminDashboardBeritaRoute
+  AdminDashboardBookingRoute: typeof AdminDashboardBookingRoute
+  AdminDashboardJadwalRoute: typeof AdminDashboardJadwalRoute
+  AdminDashboardKontenRoute: typeof AdminDashboardKontenRoute
+  AdminDashboardLaporanRoute: typeof AdminDashboardLaporanRoute
+  AdminDashboardPengaturanRoute: typeof AdminDashboardPengaturanRoute
+  AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
+}
+
+const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
+  AdminDashboardBeritaRoute: AdminDashboardBeritaRoute,
+  AdminDashboardBookingRoute: AdminDashboardBookingRoute,
+  AdminDashboardJadwalRoute: AdminDashboardJadwalRoute,
+  AdminDashboardKontenRoute: AdminDashboardKontenRoute,
+  AdminDashboardLaporanRoute: AdminDashboardLaporanRoute,
+  AdminDashboardPengaturanRoute: AdminDashboardPengaturanRoute,
+  AdminDashboardIndexRoute: AdminDashboardIndexRoute,
+}
+
+const AdminDashboardRouteWithChildren = AdminDashboardRoute._addFileChildren(
+  AdminDashboardRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -223,7 +419,9 @@ const rootRouteChildren: RootRouteChildren = {
   LaporRoute: LaporRoute,
   PeraturanRoute: PeraturanRoute,
   ProfilRoute: ProfilRoute,
+  AdminDashboardRoute: AdminDashboardRouteWithChildren,
   BeritaSlugRoute: BeritaSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
   BeritaIndexRoute: BeritaIndexRoute,
 }
 export const routeTree = rootRouteImport
