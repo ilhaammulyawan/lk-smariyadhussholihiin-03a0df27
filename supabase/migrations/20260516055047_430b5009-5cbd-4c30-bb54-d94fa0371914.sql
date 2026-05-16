@@ -1,0 +1,2 @@
+ALTER TABLE public.tik_schedule DROP CONSTRAINT IF EXISTS tik_schedule_day_of_week_check;
+ALTER TABLE public.tik_schedule ADD CONSTRAINT tik_schedule_day_of_week_check CHECK (day_of_week BETWEEN 1 AND 7);
