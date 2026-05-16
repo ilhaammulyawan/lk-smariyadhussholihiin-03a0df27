@@ -39,7 +39,19 @@ function Booking() {
   });
   const { data: blocked } = useQuery({
     queryKey: ["blocked"],
-    queryFn: async () => (await supabase.from("blocked_dates").select("date")).data ?? [],
+    queryFn: async () => (await supabase.from("blocked_dates").select("date,reason")).data ?? [],
+  });
+  const { data: upcomingBookings } = useQuery({
+    queryKey: ["bookings", "upcoming"],
+    queryFn: async () => {
+      const todayIso = new Date().toISOString().slice(0, 10);
+      const { data } = await supabase
+        .from("bookings")
+        .select("date,start_time")
+        .gte("date", todayIso)
+        .in("status", ["pending", "approved"]);
+      return data ?? [];
+    },
   });
   const { data: dayBookings } = useQuery({
     queryKey: ["bookings", date],
@@ -128,16 +140,24 @@ function Booking() {
           {step === 0 && (
             <div>
               <h2 className="text-xl font-display font-bold mb-1">Pilih Tanggal</h2>
-              <p className="text-sm text-muted-foreground mb-6">Senin–Sabtu, maksimal 30 hari ke depan.</p>
+              <p className="text-sm text-muted-foreground mb-6">Senin–Sabtu, maksimal 30 hari ke depan. Angka kecil = jumlah slot terpakai.</p>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                 {availableDates().map((d) => {
                   const iso = toISODate(d);
                   const isSel = date === iso;
+                  const dow = d.getDay() === 0 ? 7 : d.getDay();
+                  const tikCount = tik?.filter((t) => t.day_of_week === dow).length ?? 0;
+                  const bookedCount = upcomingBookings?.filter((b) => b.date === iso).length ?? 0;
+                  const used = tikCount + bookedCount;
+                  const free = SLOTS.length - used;
+                  const isFull = free <= 0;
                   return (
                     <button
                       key={iso}
+                      disabled={isFull}
                       onClick={() => setDate(iso)}
-                      className={`p-3 rounded-xl border text-center text-sm transition-colors ${
+                      className={`relative p-3 rounded-xl border text-center text-sm transition-colors ${
+                        isFull ? "border-border bg-muted/20 text-muted-foreground cursor-not-allowed" :
                         isSel ? "bg-brand text-white border-brand" : "border-border hover:border-brand/50"}`}
                     >
                       <div className="text-[10px] uppercase tracking-widest opacity-70">
@@ -145,9 +165,19 @@ function Booking() {
                       </div>
                       <div className="font-bold">{d.getDate()}</div>
                       <div className="text-[10px] opacity-70">{new Intl.DateTimeFormat("id-ID", { month: "short" }).format(d)}</div>
+                      <div className={`mt-1 text-[9px] font-bold uppercase tracking-wider ${
+                        isFull ? "text-destructive" : free <= 1 ? "text-yellow-500" : isSel ? "text-white/90" : "text-brand"
+                      }`}>
+                        {isFull ? "Penuh" : `${free} slot`}
+                      </div>
                     </button>
                   );
                 })}
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-brand" /> Tersedia</span>
+                <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-yellow-500" /> Hampir penuh</span>
+                <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-destructive" /> Penuh / Libur</span>
               </div>
             </div>
           )}
