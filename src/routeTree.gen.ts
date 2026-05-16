@@ -14,6 +14,7 @@ import { Route as PeraturanRouteImport } from './routes/peraturan'
 import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as InformasiRouteImport } from './routes/informasi'
+import { Route as CekStatusRouteImport } from './routes/cek-status'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
@@ -21,6 +22,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin/dashboard/index'
+import { Route as AdminDashboardStaffRouteImport } from './routes/admin/dashboard/staff'
 import { Route as AdminDashboardPengaturanRouteImport } from './routes/admin/dashboard/pengaturan'
 import { Route as AdminDashboardLaporanRouteImport } from './routes/admin/dashboard/laporan'
 import { Route as AdminDashboardKontenRouteImport } from './routes/admin/dashboard/konten'
@@ -51,6 +53,11 @@ const JadwalRoute = JadwalRouteImport.update({
 const InformasiRoute = InformasiRouteImport.update({
   id: '/informasi',
   path: '/informasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CekStatusRoute = CekStatusRouteImport.update({
+  id: '/cek-status',
+  path: '/cek-status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookingRoute = BookingRouteImport.update({
@@ -88,6 +95,11 @@ const AdminDashboardIndexRoute = AdminDashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminDashboardRoute,
 } as any)
+const AdminDashboardStaffRoute = AdminDashboardStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AdminDashboardRoute,
+} as any)
 const AdminDashboardPengaturanRoute =
   AdminDashboardPengaturanRouteImport.update({
     id: '/pengaturan',
@@ -123,6 +135,7 @@ const AdminDashboardBeritaRoute = AdminDashboardBeritaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/cek-status': typeof CekStatusRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
@@ -138,11 +151,13 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/cek-status': typeof CekStatusRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
@@ -157,12 +172,14 @@ export interface FileRoutesByTo {
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard': typeof AdminDashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
+  '/cek-status': typeof CekStatusRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
@@ -178,6 +195,7 @@ export interface FileRoutesById {
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
+  '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
 }
 export interface FileRouteTypes {
@@ -185,6 +203,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/booking'
+    | '/cek-status'
     | '/informasi'
     | '/jadwal'
     | '/lapor'
@@ -200,11 +219,13 @@ export interface FileRouteTypes {
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
     | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard/staff'
     | '/admin/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/booking'
+    | '/cek-status'
     | '/informasi'
     | '/jadwal'
     | '/lapor'
@@ -219,11 +240,13 @@ export interface FileRouteTypes {
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
     | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard/staff'
     | '/admin/dashboard'
   id:
     | '__root__'
     | '/'
     | '/booking'
+    | '/cek-status'
     | '/informasi'
     | '/jadwal'
     | '/lapor'
@@ -239,12 +262,14 @@ export interface FileRouteTypes {
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
     | '/admin/dashboard/pengaturan'
+    | '/admin/dashboard/staff'
     | '/admin/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingRoute: typeof BookingRoute
+  CekStatusRoute: typeof CekStatusRoute
   InformasiRoute: typeof InformasiRoute
   JadwalRoute: typeof JadwalRoute
   LaporRoute: typeof LaporRoute
@@ -291,6 +316,13 @@ declare module '@tanstack/react-router' {
       path: '/informasi'
       fullPath: '/informasi'
       preLoaderRoute: typeof InformasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cek-status': {
+      id: '/cek-status'
+      path: '/cek-status'
+      fullPath: '/cek-status'
+      preLoaderRoute: typeof CekStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/booking': {
@@ -340,6 +372,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/dashboard/'
       preLoaderRoute: typeof AdminDashboardIndexRouteImport
+      parentRoute: typeof AdminDashboardRoute
+    }
+    '/admin/dashboard/staff': {
+      id: '/admin/dashboard/staff'
+      path: '/staff'
+      fullPath: '/admin/dashboard/staff'
+      preLoaderRoute: typeof AdminDashboardStaffRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
     '/admin/dashboard/pengaturan': {
@@ -394,6 +433,7 @@ interface AdminDashboardRouteChildren {
   AdminDashboardKontenRoute: typeof AdminDashboardKontenRoute
   AdminDashboardLaporanRoute: typeof AdminDashboardLaporanRoute
   AdminDashboardPengaturanRoute: typeof AdminDashboardPengaturanRoute
+  AdminDashboardStaffRoute: typeof AdminDashboardStaffRoute
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
 }
 
@@ -404,6 +444,7 @@ const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
   AdminDashboardKontenRoute: AdminDashboardKontenRoute,
   AdminDashboardLaporanRoute: AdminDashboardLaporanRoute,
   AdminDashboardPengaturanRoute: AdminDashboardPengaturanRoute,
+  AdminDashboardStaffRoute: AdminDashboardStaffRoute,
   AdminDashboardIndexRoute: AdminDashboardIndexRoute,
 }
 
@@ -414,6 +455,7 @@ const AdminDashboardRouteWithChildren = AdminDashboardRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingRoute: BookingRoute,
+  CekStatusRoute: CekStatusRoute,
   InformasiRoute: InformasiRoute,
   JadwalRoute: JadwalRoute,
   LaporRoute: LaporRoute,

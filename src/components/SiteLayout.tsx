@@ -11,6 +11,7 @@ const NAV = [
   { to: "/berita", label: "Berita" },
   { to: "/jadwal", label: "Jadwal" },
   { to: "/lapor", label: "Lapor" },
+  { to: "/cek-status", label: "Cek Status" },
 ];
 
 export function SiteLayout({ children }: { children: ReactNode }) {
