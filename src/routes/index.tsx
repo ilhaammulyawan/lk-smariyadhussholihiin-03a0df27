@@ -170,7 +170,7 @@ function Stat({ icon, value, label }: { icon: React.ReactNode; value: string; la
   return (
     <div>
       <div className="text-brand mb-2">{icon}</div>
-      <div className="text-2xl md:text-3xl font-display font-bold">{value}</div>
+      <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold break-words">{value}</div>
       <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mt-1">{label}</div>
     </div>
   );
