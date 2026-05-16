@@ -49,27 +49,27 @@ function Beranda() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand/20 blur-[120px] rounded-full pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-5 sm:mb-6">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
               </span>
               Lab buka: {hours}
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold font-display tracking-tight leading-[1.05] mb-6 text-balance">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.05] mb-5 sm:mb-6 text-balance break-words">
               Pusat <span className="gradient-text">literasi digital</span> santri SMA Riyadhussholihiin.
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mb-10 text-pretty">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-8 sm:mb-10 text-pretty">
               {settings?.sambutan ??
                 "Selamat datang di Lab Komputer. Membentuk generasi cakap teknologi yang berakhlakul karimah melalui fasilitas modern dan pembelajaran berkualitas."}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/booking" className="px-6 py-3.5 bg-brand text-white font-semibold rounded-xl hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] transition-shadow inline-flex items-center gap-2">
+              <Link to="/booking" className="px-5 sm:px-6 py-3 sm:py-3.5 bg-brand text-white font-semibold rounded-xl hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] transition-shadow inline-flex items-center gap-2 text-sm sm:text-base">
                 Booking Lab <ArrowRight className="size-4" />
               </Link>
-              <Link to="/jadwal" className="px-6 py-3.5 bg-secondary text-foreground font-semibold rounded-xl border border-border hover:bg-accent transition-colors">
+              <Link to="/jadwal" className="px-5 sm:px-6 py-3 sm:py-3.5 bg-secondary text-foreground font-semibold rounded-xl border border-border hover:bg-accent transition-colors text-sm sm:text-base">
                 Lihat Jadwal
               </Link>
             </div>
@@ -82,7 +82,7 @@ function Beranda() {
                 alt="Lab Komputer SMA Riyadhussholihiin"
                 width={1280}
                 height={1024}
-                className="relative w-full aspect-[5/4] object-cover rounded-3xl border border-border"
+                className="relative w-full aspect-[5/4] object-cover rounded-2xl sm:rounded-3xl border border-border"
               />
             </div>
           </div>
