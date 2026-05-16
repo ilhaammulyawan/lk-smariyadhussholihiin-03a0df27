@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as PeraturanRouteImport } from './routes/peraturan'
+import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as InformasiRouteImport } from './routes/informasi'
+import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
 import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
@@ -27,6 +29,11 @@ const PeraturanRoute = PeraturanRouteImport.update({
   path: '/peraturan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LaporRoute = LaporRouteImport.update({
+  id: '/lapor',
+  path: '/lapor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JadwalRoute = JadwalRouteImport.update({
   id: '/jadwal',
   path: '/jadwal',
@@ -35,6 +42,11 @@ const JadwalRoute = JadwalRouteImport.update({
 const InformasiRoute = InformasiRouteImport.update({
   id: '/informasi',
   path: '/informasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,8 +67,10 @@ const BeritaSlugRoute = BeritaSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
+  '/lapor': typeof LaporRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
@@ -64,8 +78,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
+  '/lapor': typeof LaporRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
@@ -74,8 +90,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/booking': typeof BookingRoute
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
+  '/lapor': typeof LaporRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
@@ -85,8 +103,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/booking'
     | '/informasi'
     | '/jadwal'
+    | '/lapor'
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
@@ -94,8 +114,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/booking'
     | '/informasi'
     | '/jadwal'
+    | '/lapor'
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
@@ -103,8 +125,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/booking'
     | '/informasi'
     | '/jadwal'
+    | '/lapor'
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
@@ -113,8 +137,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookingRoute: typeof BookingRoute
   InformasiRoute: typeof InformasiRoute
   JadwalRoute: typeof JadwalRoute
+  LaporRoute: typeof LaporRoute
   PeraturanRoute: typeof PeraturanRoute
   ProfilRoute: typeof ProfilRoute
   BeritaSlugRoute: typeof BeritaSlugRoute
@@ -137,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PeraturanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lapor': {
+      id: '/lapor'
+      path: '/lapor'
+      fullPath: '/lapor'
+      preLoaderRoute: typeof LaporRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/jadwal': {
       id: '/jadwal'
       path: '/jadwal'
@@ -149,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/informasi'
       fullPath: '/informasi'
       preLoaderRoute: typeof InformasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,8 +217,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookingRoute: BookingRoute,
   InformasiRoute: InformasiRoute,
   JadwalRoute: JadwalRoute,
+  LaporRoute: LaporRoute,
   PeraturanRoute: PeraturanRoute,
   ProfilRoute: ProfilRoute,
   BeritaSlugRoute: BeritaSlugRoute,
