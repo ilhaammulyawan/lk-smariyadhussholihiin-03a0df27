@@ -133,17 +133,17 @@ function Beranda() {
 
       {/* Posts */}
       {posts && posts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 py-20">
-          <div className="flex items-end justify-between mb-12">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+          <div className="flex items-end justify-between mb-8 sm:mb-12 gap-4">
             <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight">Pengumuman Terbaru</h2>
-              <p className="text-muted-foreground mt-2">Informasi terkini dari Lab Komputer.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold tracking-tight">Pengumuman Terbaru</h2>
+              <p className="text-muted-foreground mt-2 text-sm sm:text-base">Informasi terkini dari Lab Komputer.</p>
             </div>
-            <Link to="/berita" className="text-sm font-semibold text-brand inline-flex items-center gap-1">
-              Semua Berita <ArrowRight className="size-4" />
+            <Link to="/berita" className="text-sm font-semibold text-brand inline-flex items-center gap-1 whitespace-nowrap">
+              Semua <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((p) => (
               <Link key={p.id} to="/berita/$slug" params={{ slug: p.slug }} className="group">
                 <div className="aspect-[16/10] rounded-2xl bg-surface border border-border mb-4 overflow-hidden">
