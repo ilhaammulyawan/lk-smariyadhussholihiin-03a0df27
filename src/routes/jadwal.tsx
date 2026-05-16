@@ -12,7 +12,7 @@ const DAYS = [
   { id: 4, name: "Kamis" }, { id: 5, name: "Jumat" }, { id: 6, name: "Sabtu" }, { id: 7, name: "Ahad" },
 ];
 
-const SLOTS = ["07:30", "09:15", "11:00", "13:00", "14:30"];
+
 
 function Jadwal() {
   const { data: tik } = useQuery({
