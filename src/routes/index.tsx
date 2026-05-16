@@ -90,14 +90,14 @@ function Beranda() {
       </section>
 
       {/* Stats */}
-      <section className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-10 border-y border-border">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 py-8 sm:py-10 border-y border-border">
           <Stat icon={<Cpu className="size-5" />} value={`${settings?.lab_total_pc ?? "40"}+`} label="Workstation PC" />
           <Stat icon={<Wifi className="size-5" />} value={settings?.lab_internet ?? "200 Mbps"} label="Koneksi Internet" />
           <Stat icon={<Building2 className="size-5" />} value={settings?.lab_rooms ?? "2 Ruangan"} label="Kapasitas Lab" />
           <Stat icon={<Clock className="size-5" />} value={hours} label="Jam Operasional" />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 py-10 border-b border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 py-8 sm:py-10 border-b border-border">
           <Stat icon={<CalendarCheck className="size-5" />} value={String(liveStats?.bookings ?? 0)} label="Booking Disetujui Bulan Ini" />
           <Stat icon={<Newspaper className="size-5" />} value={String(liveStats?.posts ?? 0)} label="Pengumuman Aktif" />
           <Stat icon={<CheckCircle2 className="size-5" />} value="24/7" label="Layanan Lapor Online" />
