@@ -91,8 +91,8 @@ function Jadwal() {
             </thead>
             <tbody>
               {SLOTS.map((s) => (
-                <tr key={s} className="border-b border-border last:border-0">
-                  <td className="p-3 font-mono text-xs text-muted-foreground">{s}</td>
+                <tr key={`${s.start}-${s.end}`} className="border-b border-border last:border-0">
+                  <td className="p-3 font-mono text-xs text-muted-foreground whitespace-nowrap">{s.start.slice(0,5)}–{s.end.slice(0,5)}</td>
                   {DAYS.map((d) => {
                     const st = getStatus(d.id, s);
                     const cls =
