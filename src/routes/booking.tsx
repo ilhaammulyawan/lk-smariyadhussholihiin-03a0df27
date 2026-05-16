@@ -140,7 +140,7 @@ function Booking() {
           {step === 0 && (
             <div>
               <h2 className="text-xl font-display font-bold mb-1">Pilih Tanggal</h2>
-              <p className="text-sm text-muted-foreground mb-6">Senin–Sabtu, maksimal 30 hari ke depan. Angka kecil = jumlah slot terpakai.</p>
+              <p className="text-sm text-muted-foreground mb-6">Senin–Ahad, maksimal 30 hari ke depan. Angka kecil = jumlah slot terpakai.</p>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                 {availableDates().map((d) => {
                   const iso = toISODate(d);
