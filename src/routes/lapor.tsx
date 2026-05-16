@@ -14,7 +14,6 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/lapor")({ component: Lapor });
 
 const CATEGORIES = ["Kerusakan Perangkat", "Kehilangan", "Pelanggaran", "Saran", "Lainnya"];
-const CLASSES = ["X-A", "X-B", "X-C", "XI-A", "XI-B", "XI-C", "XII-A", "XII-B", "XII-C"];
 
 function Lapor() {
   const [form, setForm] = useState({ student_name: "", class: "", category: "", content: "" });
@@ -67,12 +66,7 @@ function Lapor() {
       <section className="max-w-2xl mx-auto px-6 py-12">
         <form onSubmit={submit} className="p-6 md:p-8 rounded-3xl bg-surface/60 border border-border grid gap-5">
           <Field label="Nama Siswa *"><Input value={form.student_name} onChange={(e) => setForm({ ...form, student_name: e.target.value })} /></Field>
-          <Field label="Kelas *">
-            <Select value={form.class} onValueChange={(v) => setForm({ ...form, class: v })}>
-              <SelectTrigger><SelectValue placeholder="Pilih kelas" /></SelectTrigger>
-              <SelectContent>{CLASSES.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
-            </Select>
-          </Field>
+          <Field label="Kelas *"><Input value={form.class} onChange={(e) => setForm({ ...form, class: e.target.value })} placeholder="Contoh: X-A" /></Field>
           <Field label="Kategori Laporan *">
             <Select value={form.category} onValueChange={(v) => setForm({ ...form, category: v })}>
               <SelectTrigger><SelectValue placeholder="Pilih kategori" /></SelectTrigger>
