@@ -67,7 +67,7 @@ function Booking() {
     for (let i = 0; i < 30; i++) {
       const d = new Date(today); d.setDate(today.getDate() + i);
       const dow = d.getDay();
-      if (dow === 0) continue; // Minggu
+      // semua hari termasuk Ahad
       const iso = toISODate(d);
       if (blocked?.some((b) => b.date === iso)) continue;
       out.push(d);
