@@ -12,7 +12,7 @@ const DAYS = [
   { id: 4, name: "Kamis" }, { id: 5, name: "Jumat" }, { id: 6, name: "Sabtu" }, { id: 7, name: "Ahad" },
 ];
 
-const SLOTS = ["07:30", "09:15", "11:00", "13:00", "14:30"];
+
 
 function Jadwal() {
   const { data: tik } = useQuery({
@@ -45,13 +45,25 @@ function Jadwal() {
   const monday = new Date(today);
   monday.setDate(today.getDate() - ((today.getDay() + 6) % 7));
 
-  const getStatus = (dayId: number, slot: string) => {
-    const t = tik?.find((x) => x.day_of_week === dayId && x.start_time.slice(0, 5) === slot);
+  // Build dynamic slots from TIK + bookings (start_time-end_time)
+  const slotMap = new Map<string, { start: string; end: string }>();
+  tik?.forEach((t) => {
+    const k = `${t.start_time}-${t.end_time}`;
+    slotMap.set(k, { start: t.start_time, end: t.end_time });
+  });
+  bookings?.forEach((b) => {
+    const k = `${b.start_time}-${b.end_time}`;
+    if (!slotMap.has(k)) slotMap.set(k, { start: b.start_time, end: b.end_time });
+  });
+  const SLOTS = Array.from(slotMap.values()).sort((a, b) => a.start.localeCompare(b.start));
+
+  const getStatus = (dayId: number, slot: { start: string; end: string }) => {
+    const t = tik?.find((x) => x.day_of_week === dayId && x.start_time === slot.start && x.end_time === slot.end);
     if (t) return { kind: "tik", label: t.class_name };
     const date = new Date(monday);
     date.setDate(monday.getDate() + dayId - 1);
     const dateStr = toISODate(date);
-    const b = bookings?.find((x) => x.date === dateStr && x.start_time.slice(0, 5) === slot);
+    const b = bookings?.find((x) => x.date === dateStr && x.start_time === slot.start && x.end_time === slot.end);
     if (b) return { kind: "booked", label: b.subject };
     return { kind: "free", label: "Tersedia" };
   };
@@ -79,8 +91,8 @@ function Jadwal() {
             </thead>
             <tbody>
               {SLOTS.map((s) => (
-                <tr key={s} className="border-b border-border last:border-0">
-                  <td className="p-3 font-mono text-xs text-muted-foreground">{s}</td>
+                <tr key={`${s.start}-${s.end}`} className="border-b border-border last:border-0">
+                  <td className="p-3 font-mono text-xs text-muted-foreground whitespace-nowrap">{s.start.slice(0,5)}–{s.end.slice(0,5)}</td>
                   {DAYS.map((d) => {
                     const st = getStatus(d.id, s);
                     const cls =
