@@ -46,9 +46,19 @@ function AdminBerita() {
     qc.invalidateQueries({ queryKey: ["admin-posts"] });
   };
 
+  const uploadCover = async (file: File) => {
+    const ext = file.name.split(".").pop();
+    const path = `berita/${Date.now()}.${ext}`;
+    const { error } = await supabase.storage.from("public-files").upload(path, file, { upsert: true });
+    if (error) return toast.error(error.message);
+    const { data: pub } = supabase.storage.from("public-files").getPublicUrl(path);
+    setForm((f: any) => ({ ...f, cover_url: pub.publicUrl }));
+    toast.success("Cover diunggah");
+  };
+
   return (
     <div>
-      <h1 className="text-3xl font-display font-bold mb-1">Manajemen Berita</h1>
+      <h1 className="text-2xl sm:text-3xl font-display font-bold mb-1">Manajemen Berita</h1>
       <p className="text-muted-foreground mb-6">Tambah, ubah, atau hapus pengumuman.</p>
 
       <div className="p-5 rounded-2xl bg-surface/60 border border-border grid gap-4 mb-8">
@@ -61,7 +71,12 @@ function AdminBerita() {
               <SelectContent>{CATS.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
             </Select>
           </div>
-          <div className="grid gap-1.5"><Label>Cover URL (opsional)</Label><Input value={form.cover_url ?? ""} onChange={(e) => setForm({ ...form, cover_url: e.target.value })} /></div>
+          <div className="grid gap-1.5">
+            <Label>Cover Gambar</Label>
+            <Input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadCover(f); }} />
+            <Input placeholder="atau tempel URL" value={form.cover_url ?? ""} onChange={(e) => setForm({ ...form, cover_url: e.target.value })} />
+            {form.cover_url && <img src={form.cover_url} alt="cover" className="w-full max-w-xs aspect-[16/10] object-cover rounded-lg border border-border" />}
+          </div>
         </div>
         <div className="grid gap-1.5"><Label>Ringkasan</Label><Input value={form.excerpt ?? ""} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} /></div>
         <div className="grid gap-1.5"><Label>Isi</Label><Textarea rows={6} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} /></div>
