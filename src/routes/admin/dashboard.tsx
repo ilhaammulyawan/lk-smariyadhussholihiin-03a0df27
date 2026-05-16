@@ -55,7 +55,7 @@ function AdminShell() {
           </Button>
         </div>
       </aside>
-      <main className="flex-1 p-6 md:p-10 max-w-6xl">
+      <main className="flex-1 p-4 sm:p-6 md:p-10 w-full max-w-6xl overflow-x-hidden">
         <Outlet />
       </main>
     </div>

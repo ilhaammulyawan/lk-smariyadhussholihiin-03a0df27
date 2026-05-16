@@ -49,27 +49,27 @@ function Beranda() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand/20 blur-[120px] rounded-full pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-xs font-bold uppercase tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand/10 border border-brand/30 text-brand text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-5 sm:mb-6">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-brand"></span>
               </span>
               Lab buka: {hours}
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold font-display tracking-tight leading-[1.05] mb-6 text-balance">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold font-display tracking-tight leading-[1.05] mb-5 sm:mb-6 text-balance break-words">
               Pusat <span className="gradient-text">literasi digital</span> santri SMA Riyadhussholihiin.
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mb-10 text-pretty">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-8 sm:mb-10 text-pretty">
               {settings?.sambutan ??
                 "Selamat datang di Lab Komputer. Membentuk generasi cakap teknologi yang berakhlakul karimah melalui fasilitas modern dan pembelajaran berkualitas."}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link to="/booking" className="px-6 py-3.5 bg-brand text-white font-semibold rounded-xl hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] transition-shadow inline-flex items-center gap-2">
+              <Link to="/booking" className="px-5 sm:px-6 py-3 sm:py-3.5 bg-brand text-white font-semibold rounded-xl hover:shadow-[0_0_30px_-5px_rgba(99,102,241,0.6)] transition-shadow inline-flex items-center gap-2 text-sm sm:text-base">
                 Booking Lab <ArrowRight className="size-4" />
               </Link>
-              <Link to="/jadwal" className="px-6 py-3.5 bg-secondary text-foreground font-semibold rounded-xl border border-border hover:bg-accent transition-colors">
+              <Link to="/jadwal" className="px-5 sm:px-6 py-3 sm:py-3.5 bg-secondary text-foreground font-semibold rounded-xl border border-border hover:bg-accent transition-colors text-sm sm:text-base">
                 Lihat Jadwal
               </Link>
             </div>
@@ -82,7 +82,7 @@ function Beranda() {
                 alt="Lab Komputer SMA Riyadhussholihiin"
                 width={1280}
                 height={1024}
-                className="relative w-full aspect-[5/4] object-cover rounded-3xl border border-border"
+                className="relative w-full aspect-[5/4] object-cover rounded-2xl sm:rounded-3xl border border-border"
               />
             </div>
           </div>
@@ -90,14 +90,14 @@ function Beranda() {
       </section>
 
       {/* Stats */}
-      <section className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 py-10 border-y border-border">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 py-8 sm:py-10 border-y border-border">
           <Stat icon={<Cpu className="size-5" />} value={`${settings?.lab_total_pc ?? "40"}+`} label="Workstation PC" />
           <Stat icon={<Wifi className="size-5" />} value={settings?.lab_internet ?? "200 Mbps"} label="Koneksi Internet" />
           <Stat icon={<Building2 className="size-5" />} value={settings?.lab_rooms ?? "2 Ruangan"} label="Kapasitas Lab" />
           <Stat icon={<Clock className="size-5" />} value={hours} label="Jam Operasional" />
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 py-10 border-b border-border">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 py-8 sm:py-10 border-b border-border">
           <Stat icon={<CalendarCheck className="size-5" />} value={String(liveStats?.bookings ?? 0)} label="Booking Disetujui Bulan Ini" />
           <Stat icon={<Newspaper className="size-5" />} value={String(liveStats?.posts ?? 0)} label="Pengumuman Aktif" />
           <Stat icon={<CheckCircle2 className="size-5" />} value="24/7" label="Layanan Lapor Online" />
@@ -105,11 +105,11 @@ function Beranda() {
       </section>
 
       {/* Greeting + Shortcuts */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-12 gap-6 sm:gap-10">
         {head && (
-          <div className="lg:col-span-5 p-8 rounded-3xl bg-surface/60 border border-border">
-            <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">Sambutan Kepala Lab</div>
-            <blockquote className="text-xl font-display leading-relaxed text-pretty mb-8">
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-surface/60 border border-border">
+            <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Sambutan Kepala Lab</div>
+            <blockquote className="text-lg sm:text-xl font-display leading-relaxed text-pretty mb-6 sm:mb-8">
               "{head.greeting}"
             </blockquote>
             <div className="flex items-center gap-4">
@@ -133,17 +133,17 @@ function Beranda() {
 
       {/* Posts */}
       {posts && posts.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 py-20">
-          <div className="flex items-end justify-between mb-12">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+          <div className="flex items-end justify-between mb-8 sm:mb-12 gap-4">
             <div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight">Pengumuman Terbaru</h2>
-              <p className="text-muted-foreground mt-2">Informasi terkini dari Lab Komputer.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold tracking-tight">Pengumuman Terbaru</h2>
+              <p className="text-muted-foreground mt-2 text-sm sm:text-base">Informasi terkini dari Lab Komputer.</p>
             </div>
-            <Link to="/berita" className="text-sm font-semibold text-brand inline-flex items-center gap-1">
-              Semua Berita <ArrowRight className="size-4" />
+            <Link to="/berita" className="text-sm font-semibold text-brand inline-flex items-center gap-1 whitespace-nowrap">
+              Semua <ArrowRight className="size-4" />
             </Link>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((p) => (
               <Link key={p.id} to="/berita/$slug" params={{ slug: p.slug }} className="group">
                 <div className="aspect-[16/10] rounded-2xl bg-surface border border-border mb-4 overflow-hidden">
@@ -170,7 +170,7 @@ function Stat({ icon, value, label }: { icon: React.ReactNode; value: string; la
   return (
     <div>
       <div className="text-brand mb-2">{icon}</div>
-      <div className="text-2xl md:text-3xl font-display font-bold">{value}</div>
+      <div className="text-xl sm:text-2xl md:text-3xl font-display font-bold break-words">{value}</div>
       <div className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold mt-1">{label}</div>
     </div>
   );
