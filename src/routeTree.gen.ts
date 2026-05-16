@@ -9,38 +9,148 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProfilRouteImport } from './routes/profil'
+import { Route as PeraturanRouteImport } from './routes/peraturan'
+import { Route as JadwalRouteImport } from './routes/jadwal'
+import { Route as InformasiRouteImport } from './routes/informasi'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BeritaIndexRouteImport } from './routes/berita/index'
+import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
 
+const ProfilRoute = ProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PeraturanRoute = PeraturanRouteImport.update({
+  id: '/peraturan',
+  path: '/peraturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JadwalRoute = JadwalRouteImport.update({
+  id: '/jadwal',
+  path: '/jadwal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformasiRoute = InformasiRouteImport.update({
+  id: '/informasi',
+  path: '/informasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BeritaIndexRoute = BeritaIndexRouteImport.update({
+  id: '/berita/',
+  path: '/berita/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeritaSlugRoute = BeritaSlugRouteImport.update({
+  id: '/berita/$slug',
+  path: '/berita/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/informasi': typeof InformasiRoute
+  '/jadwal': typeof JadwalRoute
+  '/peraturan': typeof PeraturanRoute
+  '/profil': typeof ProfilRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/berita/': typeof BeritaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/informasi': typeof InformasiRoute
+  '/jadwal': typeof JadwalRoute
+  '/peraturan': typeof PeraturanRoute
+  '/profil': typeof ProfilRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/berita': typeof BeritaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/informasi': typeof InformasiRoute
+  '/jadwal': typeof JadwalRoute
+  '/peraturan': typeof PeraturanRoute
+  '/profil': typeof ProfilRoute
+  '/berita/$slug': typeof BeritaSlugRoute
+  '/berita/': typeof BeritaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/informasi'
+    | '/jadwal'
+    | '/peraturan'
+    | '/profil'
+    | '/berita/$slug'
+    | '/berita/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/informasi'
+    | '/jadwal'
+    | '/peraturan'
+    | '/profil'
+    | '/berita/$slug'
+    | '/berita'
+  id:
+    | '__root__'
+    | '/'
+    | '/informasi'
+    | '/jadwal'
+    | '/peraturan'
+    | '/profil'
+    | '/berita/$slug'
+    | '/berita/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InformasiRoute: typeof InformasiRoute
+  JadwalRoute: typeof JadwalRoute
+  PeraturanRoute: typeof PeraturanRoute
+  ProfilRoute: typeof ProfilRoute
+  BeritaSlugRoute: typeof BeritaSlugRoute
+  BeritaIndexRoute: typeof BeritaIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/profil': {
+      id: '/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof ProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/peraturan': {
+      id: '/peraturan'
+      path: '/peraturan'
+      fullPath: '/peraturan'
+      preLoaderRoute: typeof PeraturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jadwal': {
+      id: '/jadwal'
+      path: '/jadwal'
+      fullPath: '/jadwal'
+      preLoaderRoute: typeof JadwalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informasi': {
+      id: '/informasi'
+      path: '/informasi'
+      fullPath: '/informasi'
+      preLoaderRoute: typeof InformasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +158,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/berita/': {
+      id: '/berita/'
+      path: '/berita'
+      fullPath: '/berita/'
+      preLoaderRoute: typeof BeritaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/berita/$slug': {
+      id: '/berita/$slug'
+      path: '/berita/$slug'
+      fullPath: '/berita/$slug'
+      preLoaderRoute: typeof BeritaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InformasiRoute: InformasiRoute,
+  JadwalRoute: JadwalRoute,
+  PeraturanRoute: PeraturanRoute,
+  ProfilRoute: ProfilRoute,
+  BeritaSlugRoute: BeritaSlugRoute,
+  BeritaIndexRoute: BeritaIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
