@@ -105,11 +105,11 @@ function Beranda() {
       </section>
 
       {/* Greeting + Shortcuts */}
-      <section className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-12 gap-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20 grid lg:grid-cols-12 gap-6 sm:gap-10">
         {head && (
-          <div className="lg:col-span-5 p-8 rounded-3xl bg-surface/60 border border-border">
-            <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-6">Sambutan Kepala Lab</div>
-            <blockquote className="text-xl font-display leading-relaxed text-pretty mb-8">
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-surface/60 border border-border">
+            <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4 sm:mb-6">Sambutan Kepala Lab</div>
+            <blockquote className="text-lg sm:text-xl font-display leading-relaxed text-pretty mb-6 sm:mb-8">
               "{head.greeting}"
             </blockquote>
             <div className="flex items-center gap-4">
