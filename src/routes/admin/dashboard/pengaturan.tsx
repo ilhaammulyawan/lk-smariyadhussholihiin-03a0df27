@@ -11,6 +11,7 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/admin/dashboard/pengaturan")({ component: AdminPengaturan });
 
 const FIELDS: { key: string; label: string; multi?: boolean }[] = [
+  { key: "hero_image_url", label: "URL Gambar Hero (Beranda)" },
   { key: "lab_name", label: "Nama Lab" },
   { key: "admin_wa", label: "Nomor WA Admin (628xxx)" },
   { key: "operational_hours", label: "Jam Operasional" },
