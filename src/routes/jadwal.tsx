@@ -55,7 +55,10 @@ function Jadwal() {
     const k = `${b.start_time}-${b.end_time}`;
     if (!slotMap.has(k)) slotMap.set(k, { start: b.start_time, end: b.end_time });
   });
-  const SLOTS = Array.from(slotMap.values()).sort((a, b) => a.start.localeCompare(b.start));
+  const HIDDEN = new Set(["07:30-09:00", "09:15-10:45"]);
+  const SLOTS = Array.from(slotMap.values())
+    .filter((s) => !HIDDEN.has(`${s.start.slice(0,5)}-${s.end.slice(0,5)}`))
+    .sort((a, b) => a.start.localeCompare(b.start));
 
   const getStatus = (dayId: number, slot: { start: string; end: string }) => {
     const t = tik?.find((x) => x.day_of_week === dayId && x.start_time === slot.start && x.end_time === slot.end);
