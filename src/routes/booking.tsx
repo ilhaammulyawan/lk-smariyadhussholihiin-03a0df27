@@ -16,8 +16,6 @@ import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 export const Route = createFileRoute("/booking")({ component: Booking });
 
 const SLOTS = [
-  { start: "07:30", end: "09:00" },
-  { start: "09:15", end: "10:45" },
   { start: "11:00", end: "12:30" },
   { start: "13:00", end: "14:30" },
   { start: "14:30", end: "16:00" },
