@@ -15,10 +15,12 @@ import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 
 export const Route = createFileRoute("/booking")({ component: Booking });
 
+// KBM 07:40–12:40, istirahat 10:00–10:30 (tidak ada slot)
 const SLOTS = [
-  { start: "11:00", end: "12:30" },
-  { start: "13:00", end: "14:30" },
-  { start: "14:30", end: "16:00" },
+  { start: "07:40", end: "08:50" },
+  { start: "08:50", end: "10:00" },
+  { start: "10:30", end: "11:40" },
+  { start: "11:40", end: "12:40" },
 ];
 
 const STEPS = ["Pilih Tanggal", "Pilih Jam", "Data & Keperluan", "Konfirmasi"];
