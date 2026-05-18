@@ -112,11 +112,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <MessageCircle className="size-4 text-brand" />
-                  <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="hover:text-brand">+62 812-3456-7890</a>
+                  <a href="https://wa.me/6289618939355" target="_blank" rel="noreferrer" className="hover:text-brand">+62 896-1893-9355</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <Mail className="size-4 text-brand" />
-                  <a href="mailto:labkom@riyadhussholihiin.sch.id" className="hover:text-brand">labkom@riyadhussholihiin.sch.id</a>
+                  <a href="mailto:labkom@smariyadhussholihiin.sch.id" className="hover:text-brand">labkom@smariyadhussholihiin.sch.id</a>
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="size-4 text-brand" />
