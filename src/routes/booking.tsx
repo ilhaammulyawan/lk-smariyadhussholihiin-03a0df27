@@ -67,7 +67,8 @@ function Booking() {
     for (let i = 0; i < 30; i++) {
       const d = new Date(today); d.setDate(today.getDate() + i);
       const dow = d.getDay();
-      // semua hari termasuk Ahad
+      // Jumat libur (tidak ada KBM)
+      if (dow === 5) continue;
       const iso = toISODate(d);
       if (blocked?.some((b) => b.date === iso)) continue;
       out.push(d);

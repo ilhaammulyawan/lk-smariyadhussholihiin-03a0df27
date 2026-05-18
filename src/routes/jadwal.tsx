@@ -13,7 +13,6 @@ const DAYS = [
   { id: 2, short: "Sel", name: "Selasa" },
   { id: 3, short: "Rab", name: "Rabu" },
   { id: 4, short: "Kam", name: "Kamis" },
-  { id: 5, short: "Jum", name: "Jumat" },
   { id: 6, short: "Sab", name: "Sabtu" },
   { id: 7, short: "Ahd", name: "Ahad" },
 ];
