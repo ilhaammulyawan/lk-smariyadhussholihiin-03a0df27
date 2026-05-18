@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ReactNode, useState } from "react";
-import { Menu, X, Monitor } from "lucide-react";
+import { Menu, X, Monitor, Mail, MessageCircle, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
