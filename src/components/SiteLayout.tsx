@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ReactNode, useState } from "react";
-import { Menu, X, Monitor } from "lucide-react";
+import { Menu, X, Monitor, Mail, MessageCircle, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -92,42 +92,60 @@ export function SiteLayout({ children }: { children: ReactNode }) {
 
       <main className="flex-1">{children}</main>
 
-      <footer className="border-t border-border bg-surface/30 mt-24">
-        <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <span className="size-8 rounded-lg bg-gradient-to-br from-brand to-accent2 flex items-center justify-center">
-                <Monitor className="size-4 text-white" />
-              </span>
-              <span className="font-display font-bold">Lab Komputer SMA Riyadhussholihiin</span>
-            </div>
-            <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-              Pusat literasi digital santri — menghadirkan fasilitas komputasi modern untuk mendukung pembelajaran dan
-              kompetensi teknologi berbasis nilai islami.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Navigasi</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link to="/profil" className="hover:text-brand">Profil Lab</Link></li>
-              <li><Link to="/jadwal" className="hover:text-brand">Jadwal Lab</Link></li>
-              <li><Link to="/peraturan" className="hover:text-brand">Peraturan</Link></li>
-              <li><Link to="/berita" className="hover:text-brand">Berita</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Layanan</h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link to="/booking" className="hover:text-brand">Booking Lab</Link></li>
-              <li><Link to="/lapor" className="hover:text-brand">Lapor Siswa</Link></li>
-              <li><Link to="/admin" className="hover:text-brand text-muted-foreground">Admin</Link></li>
-            </ul>
-          </div>
+      <footer className="mt-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         </div>
-        <div className="border-t border-border">
-          <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground flex flex-wrap items-center justify-between gap-2">
-            <span>&copy; {new Date().getFullYear()} SMA Riyadhussholihiin. All rights reserved.</span>
-            <span className="font-mono uppercase tracking-widest">Designed for santri</span>
+        <div className="bg-surface/30">
+          <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="size-8 rounded-lg bg-gradient-to-br from-brand to-accent2 flex items-center justify-center">
+                  <Monitor className="size-4 text-white" />
+                </span>
+                <span className="font-display font-bold">Lab Komputer SMA Riyadhussholihiin</span>
+              </div>
+              <p className="text-sm text-muted-foreground max-w-md leading-relaxed mb-5">
+                Pusat literasi digital santri — menghadirkan fasilitas komputasi modern untuk mendukung pembelajaran dan
+                kompetensi teknologi berbasis nilai islami.
+              </p>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <MessageCircle className="size-4 text-brand" />
+                  <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" className="hover:text-brand">+62 812-3456-7890</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="size-4 text-brand" />
+                  <a href="mailto:labkom@riyadhussholihiin.sch.id" className="hover:text-brand">labkom@riyadhussholihiin.sch.id</a>
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="size-4 text-brand" />
+                  <span>SMA Riyadhussholihiin</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Navigasi</h4>
+              <ul className="space-y-2.5 text-sm">
+                <li><Link to="/profil" className="hover:text-brand">Profil Lab</Link></li>
+                <li><Link to="/jadwal" className="hover:text-brand">Jadwal Lab</Link></li>
+                <li><Link to="/peraturan" className="hover:text-brand">Peraturan</Link></li>
+                <li><Link to="/berita" className="hover:text-brand">Berita</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">Layanan</h4>
+              <ul className="space-y-2.5 text-sm">
+                <li><Link to="/booking" className="hover:text-brand">Booking Lab</Link></li>
+                <li><Link to="/lapor" className="hover:text-brand">Lapor Siswa</Link></li>
+                <li><Link to="/admin" className="hover:text-brand text-muted-foreground">Admin</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-border">
+            <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground text-center">
+              &copy; {new Date().getFullYear()} Lab Komputer SMA Riyadhussholihiin. Dibuat oleh Guru Informatika dengan <span className="text-rose-500">❤️</span> untuk santri.
+            </div>
           </div>
         </div>
       </footer>
