@@ -25,7 +25,6 @@ import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin/dashboard/index'
 import { Route as AdminDashboardStaffRouteImport } from './routes/admin/dashboard/staff'
 import { Route as AdminDashboardPengaturanRouteImport } from './routes/admin/dashboard/pengaturan'
-import { Route as AdminDashboardMateriRouteImport } from './routes/admin/dashboard/materi'
 import { Route as AdminDashboardLaporanRouteImport } from './routes/admin/dashboard/laporan'
 import { Route as AdminDashboardKontenRouteImport } from './routes/admin/dashboard/konten'
 import { Route as AdminDashboardJadwalRouteImport } from './routes/admin/dashboard/jadwal'
@@ -113,11 +112,6 @@ const AdminDashboardPengaturanRoute =
     path: '/pengaturan',
     getParentRoute: () => AdminDashboardRoute,
   } as any)
-const AdminDashboardMateriRoute = AdminDashboardMateriRouteImport.update({
-  id: '/materi',
-  path: '/materi',
-  getParentRoute: () => AdminDashboardRoute,
-} as any)
 const AdminDashboardLaporanRoute = AdminDashboardLaporanRouteImport.update({
   id: '/laporan',
   path: '/laporan',
@@ -163,7 +157,6 @@ export interface FileRoutesByFullPath {
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
-  '/admin/dashboard/materi': typeof AdminDashboardMateriRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
   '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
@@ -186,7 +179,6 @@ export interface FileRoutesByTo {
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
-  '/admin/dashboard/materi': typeof AdminDashboardMateriRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
   '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard': typeof AdminDashboardIndexRoute
@@ -211,7 +203,6 @@ export interface FileRoutesById {
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
   '/admin/dashboard/konten': typeof AdminDashboardKontenRoute
   '/admin/dashboard/laporan': typeof AdminDashboardLaporanRoute
-  '/admin/dashboard/materi': typeof AdminDashboardMateriRoute
   '/admin/dashboard/pengaturan': typeof AdminDashboardPengaturanRoute
   '/admin/dashboard/staff': typeof AdminDashboardStaffRoute
   '/admin/dashboard/': typeof AdminDashboardIndexRoute
@@ -237,7 +228,6 @@ export interface FileRouteTypes {
     | '/admin/dashboard/jadwal'
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
-    | '/admin/dashboard/materi'
     | '/admin/dashboard/pengaturan'
     | '/admin/dashboard/staff'
     | '/admin/dashboard/'
@@ -260,7 +250,6 @@ export interface FileRouteTypes {
     | '/admin/dashboard/jadwal'
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
-    | '/admin/dashboard/materi'
     | '/admin/dashboard/pengaturan'
     | '/admin/dashboard/staff'
     | '/admin/dashboard'
@@ -284,7 +273,6 @@ export interface FileRouteTypes {
     | '/admin/dashboard/jadwal'
     | '/admin/dashboard/konten'
     | '/admin/dashboard/laporan'
-    | '/admin/dashboard/materi'
     | '/admin/dashboard/pengaturan'
     | '/admin/dashboard/staff'
     | '/admin/dashboard/'
@@ -420,13 +408,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardPengaturanRouteImport
       parentRoute: typeof AdminDashboardRoute
     }
-    '/admin/dashboard/materi': {
-      id: '/admin/dashboard/materi'
-      path: '/materi'
-      fullPath: '/admin/dashboard/materi'
-      preLoaderRoute: typeof AdminDashboardMateriRouteImport
-      parentRoute: typeof AdminDashboardRoute
-    }
     '/admin/dashboard/laporan': {
       id: '/admin/dashboard/laporan'
       path: '/laporan'
@@ -471,7 +452,6 @@ interface AdminDashboardRouteChildren {
   AdminDashboardJadwalRoute: typeof AdminDashboardJadwalRoute
   AdminDashboardKontenRoute: typeof AdminDashboardKontenRoute
   AdminDashboardLaporanRoute: typeof AdminDashboardLaporanRoute
-  AdminDashboardMateriRoute: typeof AdminDashboardMateriRoute
   AdminDashboardPengaturanRoute: typeof AdminDashboardPengaturanRoute
   AdminDashboardStaffRoute: typeof AdminDashboardStaffRoute
   AdminDashboardIndexRoute: typeof AdminDashboardIndexRoute
@@ -483,7 +463,6 @@ const AdminDashboardRouteChildren: AdminDashboardRouteChildren = {
   AdminDashboardJadwalRoute: AdminDashboardJadwalRoute,
   AdminDashboardKontenRoute: AdminDashboardKontenRoute,
   AdminDashboardLaporanRoute: AdminDashboardLaporanRoute,
-  AdminDashboardMateriRoute: AdminDashboardMateriRoute,
   AdminDashboardPengaturanRoute: AdminDashboardPengaturanRoute,
   AdminDashboardStaffRoute: AdminDashboardStaffRoute,
   AdminDashboardIndexRoute: AdminDashboardIndexRoute,
@@ -511,3 +490,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
