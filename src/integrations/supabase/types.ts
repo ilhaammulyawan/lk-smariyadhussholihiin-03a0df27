@@ -107,6 +107,45 @@ export type Database = {
         }
         Relationships: []
       }
+      materials: {
+        Row: {
+          active: boolean
+          category: string
+          class_level: string
+          created_at: string
+          description: string | null
+          id: string
+          sort_order: number
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          category?: string
+          class_level?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          active?: boolean
+          category?: string
+          class_level?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           category: string

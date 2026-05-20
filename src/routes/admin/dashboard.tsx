@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { LogOut, LayoutDashboard, CalendarCheck, ClipboardList, FileText, Newspaper, Settings, CalendarX, Users } from "lucide-react";
+import { LogOut, LayoutDashboard, CalendarCheck, ClipboardList, FileText, Newspaper, Settings, CalendarX, Users, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin/dashboard")({ component: AdminShell });
@@ -14,6 +14,7 @@ const ITEMS = [
   { to: "/admin/dashboard/laporan", label: "Laporan", icon: ClipboardList },
   { to: "/admin/dashboard/jadwal", label: "Jadwal & Libur", icon: CalendarX },
   { to: "/admin/dashboard/staff", label: "Staff", icon: Users },
+  { to: "/admin/dashboard/materi", label: "Materi", icon: BookOpen },
   { to: "/admin/dashboard/berita", label: "Berita", icon: Newspaper },
   { to: "/admin/dashboard/konten", label: "Konten", icon: FileText },
   { to: "/admin/dashboard/pengaturan", label: "Pengaturan", icon: Settings },

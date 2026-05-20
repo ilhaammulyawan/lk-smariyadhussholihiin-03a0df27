@@ -8,6 +8,7 @@ const NAV = [
   { to: "/profil", label: "Profil" },
   { to: "/informasi", label: "Info Lab" },
   { to: "/peraturan", label: "Peraturan" },
+  { to: "/materi", label: "Materi" },
   { to: "/berita", label: "Berita" },
   { to: "/jadwal", label: "Jadwal" },
   { to: "/lapor", label: "Lapor" },
