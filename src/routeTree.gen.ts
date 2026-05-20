@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ProfilRouteImport } from './routes/profil'
 import { Route as PeraturanRouteImport } from './routes/peraturan'
+import { Route as MateriRouteImport } from './routes/materi'
 import { Route as LaporRouteImport } from './routes/lapor'
 import { Route as JadwalRouteImport } from './routes/jadwal'
 import { Route as InformasiRouteImport } from './routes/informasi'
@@ -38,6 +39,11 @@ const ProfilRoute = ProfilRouteImport.update({
 const PeraturanRoute = PeraturanRouteImport.update({
   id: '/peraturan',
   path: '/peraturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MateriRoute = MateriRouteImport.update({
+  id: '/materi',
+  path: '/materi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LaporRoute = LaporRouteImport.update({
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
+  '/materi': typeof MateriRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
+  '/materi': typeof MateriRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/informasi': typeof InformasiRoute
   '/jadwal': typeof JadwalRoute
   '/lapor': typeof LaporRoute
+  '/materi': typeof MateriRoute
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/informasi'
     | '/jadwal'
     | '/lapor'
+    | '/materi'
     | '/peraturan'
     | '/profil'
     | '/admin/dashboard'
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/informasi'
     | '/jadwal'
     | '/lapor'
+    | '/materi'
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
@@ -250,6 +261,7 @@ export interface FileRouteTypes {
     | '/informasi'
     | '/jadwal'
     | '/lapor'
+    | '/materi'
     | '/peraturan'
     | '/profil'
     | '/admin/dashboard'
@@ -273,6 +285,7 @@ export interface RootRouteChildren {
   InformasiRoute: typeof InformasiRoute
   JadwalRoute: typeof JadwalRoute
   LaporRoute: typeof LaporRoute
+  MateriRoute: typeof MateriRoute
   PeraturanRoute: typeof PeraturanRoute
   ProfilRoute: typeof ProfilRoute
   AdminDashboardRoute: typeof AdminDashboardRouteWithChildren
@@ -295,6 +308,13 @@ declare module '@tanstack/react-router' {
       path: '/peraturan'
       fullPath: '/peraturan'
       preLoaderRoute: typeof PeraturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materi': {
+      id: '/materi'
+      path: '/materi'
+      fullPath: '/materi'
+      preLoaderRoute: typeof MateriRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lapor': {
@@ -459,6 +479,7 @@ const rootRouteChildren: RootRouteChildren = {
   InformasiRoute: InformasiRoute,
   JadwalRoute: JadwalRoute,
   LaporRoute: LaporRoute,
+  MateriRoute: MateriRoute,
   PeraturanRoute: PeraturanRoute,
   ProfilRoute: ProfilRoute,
   AdminDashboardRoute: AdminDashboardRouteWithChildren,
@@ -469,3 +490,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
