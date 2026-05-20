@@ -14,7 +14,7 @@ const ITEMS = [
   { to: "/admin/dashboard/laporan", label: "Laporan", icon: ClipboardList },
   { to: "/admin/dashboard/jadwal", label: "Jadwal & Libur", icon: CalendarX },
   { to: "/admin/dashboard/staff", label: "Staff", icon: Users },
-  { to: "/admin/dashboard/materi", label: "Materi", icon: BookOpen },
+  
   { to: "/admin/dashboard/berita", label: "Berita", icon: Newspaper },
   { to: "/admin/dashboard/konten", label: "Konten", icon: FileText },
   { to: "/admin/dashboard/pengaturan", label: "Pengaturan", icon: Settings },
