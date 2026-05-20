@@ -24,6 +24,9 @@ const FIELDS: { key: string; label: string; multi?: boolean }[] = [
   { key: "sambutan", label: "Sambutan Beranda", multi: true },
   { key: "visi", label: "Visi", multi: true },
   { key: "misi", label: "Misi", multi: true },
+  { key: "materi_url", label: "URL Portal Materi (cth: https://informatika.pages.dev)" },
+  { key: "materi_title", label: "Judul Kartu Materi" },
+  { key: "materi_desc", label: "Deskripsi Kartu Materi", multi: true },
 ];
 
 function AdminPengaturan() {
