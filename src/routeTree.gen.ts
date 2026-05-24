@@ -18,8 +18,10 @@ import { Route as InformasiRouteImport } from './routes/informasi'
 import { Route as CekStatusRouteImport } from './routes/cek-status'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SIndexRouteImport } from './routes/s.index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as SCodeRouteImport } from './routes/s.$code'
 import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin/dashboard/index'
@@ -76,6 +78,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SIndexRoute = SIndexRouteImport.update({
+  id: '/s/',
+  path: '/s/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BeritaIndexRoute = BeritaIndexRouteImport.update({
   id: '/berita/',
   path: '/berita/',
@@ -84,6 +91,11 @@ const BeritaIndexRoute = BeritaIndexRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SCodeRoute = SCodeRouteImport.update({
+  id: '/s/$code',
+  path: '/s/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BeritaSlugRoute = BeritaSlugRouteImport.update({
@@ -150,8 +162,10 @@ export interface FileRoutesByFullPath {
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
+  '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/s/': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -172,8 +186,10 @@ export interface FileRoutesByTo {
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
+  '/s/$code': typeof SCodeRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
+  '/s': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -196,8 +212,10 @@ export interface FileRoutesById {
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
+  '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
+  '/s/': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -221,8 +239,10 @@ export interface FileRouteTypes {
     | '/profil'
     | '/admin/dashboard'
     | '/berita/$slug'
+    | '/s/$code'
     | '/admin/'
     | '/berita/'
+    | '/s/'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -243,8 +263,10 @@ export interface FileRouteTypes {
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
+    | '/s/$code'
     | '/admin'
     | '/berita'
+    | '/s'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -266,8 +288,10 @@ export interface FileRouteTypes {
     | '/profil'
     | '/admin/dashboard'
     | '/berita/$slug'
+    | '/s/$code'
     | '/admin/'
     | '/berita/'
+    | '/s/'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -290,8 +314,10 @@ export interface RootRouteChildren {
   ProfilRoute: typeof ProfilRoute
   AdminDashboardRoute: typeof AdminDashboardRouteWithChildren
   BeritaSlugRoute: typeof BeritaSlugRoute
+  SCodeRoute: typeof SCodeRoute
   AdminIndexRoute: typeof AdminIndexRoute
   BeritaIndexRoute: typeof BeritaIndexRoute
+  SIndexRoute: typeof SIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -359,6 +385,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/s/': {
+      id: '/s/'
+      path: '/s'
+      fullPath: '/s/'
+      preLoaderRoute: typeof SIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/berita/': {
       id: '/berita/'
       path: '/berita'
@@ -371,6 +404,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s/$code': {
+      id: '/s/$code'
+      path: '/s/$code'
+      fullPath: '/s/$code'
+      preLoaderRoute: typeof SCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/berita/$slug': {
@@ -484,19 +524,11 @@ const rootRouteChildren: RootRouteChildren = {
   ProfilRoute: ProfilRoute,
   AdminDashboardRoute: AdminDashboardRouteWithChildren,
   BeritaSlugRoute: BeritaSlugRoute,
+  SCodeRoute: SCodeRoute,
   AdminIndexRoute: AdminIndexRoute,
   BeritaIndexRoute: BeritaIndexRoute,
+  SIndexRoute: SIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

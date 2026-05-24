@@ -11,6 +11,7 @@ const NAV = [
   { to: "/materi", label: "Materi" },
   { to: "/berita", label: "Berita" },
   { to: "/jadwal", label: "Jadwal" },
+  { to: "/s", label: "Shortlink" },
   { to: "/lapor", label: "Lapor" },
   { to: "/cek-status", label: "Cek Status" },
 ];
