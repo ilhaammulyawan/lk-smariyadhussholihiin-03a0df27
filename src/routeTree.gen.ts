@@ -20,7 +20,6 @@ import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as SCodeRouteImport } from './routes/s.$code'
 import { Route as BeritaSlugRouteImport } from './routes/berita/$slug'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminDashboardIndexRouteImport } from './routes/admin/dashboard/index'
@@ -87,11 +86,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SCodeRoute = SCodeRouteImport.update({
-  id: '/s/$code',
-  path: '/s/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BeritaSlugRoute = BeritaSlugRouteImport.update({
   id: '/berita/$slug',
   path: '/berita/$slug',
@@ -156,7 +150,6 @@ export interface FileRoutesByFullPath {
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
-  '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
@@ -179,7 +172,6 @@ export interface FileRoutesByTo {
   '/peraturan': typeof PeraturanRoute
   '/profil': typeof ProfilRoute
   '/berita/$slug': typeof BeritaSlugRoute
-  '/s/$code': typeof SCodeRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
@@ -204,7 +196,6 @@ export interface FileRoutesById {
   '/profil': typeof ProfilRoute
   '/admin/dashboard': typeof AdminDashboardRouteWithChildren
   '/berita/$slug': typeof BeritaSlugRoute
-  '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
@@ -230,7 +221,6 @@ export interface FileRouteTypes {
     | '/profil'
     | '/admin/dashboard'
     | '/berita/$slug'
-    | '/s/$code'
     | '/admin/'
     | '/berita/'
     | '/admin/dashboard/berita'
@@ -253,7 +243,6 @@ export interface FileRouteTypes {
     | '/peraturan'
     | '/profil'
     | '/berita/$slug'
-    | '/s/$code'
     | '/admin'
     | '/berita'
     | '/admin/dashboard/berita'
@@ -277,7 +266,6 @@ export interface FileRouteTypes {
     | '/profil'
     | '/admin/dashboard'
     | '/berita/$slug'
-    | '/s/$code'
     | '/admin/'
     | '/berita/'
     | '/admin/dashboard/berita'
@@ -302,7 +290,6 @@ export interface RootRouteChildren {
   ProfilRoute: typeof ProfilRoute
   AdminDashboardRoute: typeof AdminDashboardRouteWithChildren
   BeritaSlugRoute: typeof BeritaSlugRoute
-  SCodeRoute: typeof SCodeRoute
   AdminIndexRoute: typeof AdminIndexRoute
   BeritaIndexRoute: typeof BeritaIndexRoute
 }
@@ -384,13 +371,6 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s/$code': {
-      id: '/s/$code'
-      path: '/s/$code'
-      fullPath: '/s/$code'
-      preLoaderRoute: typeof SCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/berita/$slug': {
@@ -504,7 +484,6 @@ const rootRouteChildren: RootRouteChildren = {
   ProfilRoute: ProfilRoute,
   AdminDashboardRoute: AdminDashboardRouteWithChildren,
   BeritaSlugRoute: BeritaSlugRoute,
-  SCodeRoute: SCodeRoute,
   AdminIndexRoute: AdminIndexRoute,
   BeritaIndexRoute: BeritaIndexRoute,
 }
