@@ -105,14 +105,14 @@ function Booking() {
       return;
     }
     toast.success("Booking tersimpan, mengarahkan ke WhatsApp...");
-    const adminWa = settings?.admin_wa ?? "";
+    const { data: adminWa } = await supabase.rpc("get_public_admin_wa");
     const msg =
       `Halo Admin Lab, saya ${form.teacher_name} ingin booking Lab Komputer:%0A` +
       `📅 ${formatDateID(date)}%0A🕐 ${slot.start} - ${slot.end}%0A` +
       `📚 ${form.subject}%0A👥 ${form.student_count} siswa%0A📱 ${form.teacher_wa}%0A` +
       `Mohon konfirmasinya. Terima kasih.`;
     setTimeout(() => {
-      window.location.href = `https://wa.me/${adminWa}?text=${msg}`;
+      window.location.href = `https://wa.me/${adminWa ?? ""}?text=${msg}`;
     }, 800);
   };
 

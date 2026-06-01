@@ -46,13 +46,8 @@ function CekStatus() {
     // Untuk laporan, gunakan endpoint terbatas via .select() dengan filter ticket_number — tapi RLS hanya admin.
     // Solusi pragmatis: tambah path search via WA di bookings (publik bisa SELECT).
 
-    // 1. Booking by teacher_wa atau teacher_name (publik bisa read)
-    const { data: bookings } = await supabase
-      .from("bookings")
-      .select("status,date,start_time,end_time,subject,teacher_name,teacher_wa")
-      .or(`teacher_wa.ilike.%${q}%,teacher_name.ilike.%${q}%`)
-      .order("date", { ascending: false })
-      .limit(20);
+    // 1. Booking by teacher_wa atau teacher_name (via RPC aman — tidak expose teacher_wa)
+    const { data: bookings } = await supabase.rpc("lookup_bookings", { _q: q });
 
     bookings?.forEach((b) =>
       out.push({

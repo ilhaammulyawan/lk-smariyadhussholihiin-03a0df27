@@ -293,33 +293,6 @@ export type Database = {
         }
         Relationships: []
       }
-      short_links: {
-        Row: {
-          clicks: number
-          code: string
-          created_at: string
-          id: string
-          note: string | null
-          target_url: string
-        }
-        Insert: {
-          clicks?: number
-          code: string
-          created_at?: string
-          id?: string
-          note?: string | null
-          target_url: string
-        }
-        Update: {
-          clicks?: number
-          code?: string
-          created_at?: string
-          id?: string
-          note?: string | null
-          target_url?: string
-        }
-        Relationships: []
-      }
       staff: {
         Row: {
           active: boolean
@@ -409,6 +382,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_admin_wa: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -416,7 +390,17 @@ export type Database = {
         }
         Returns: boolean
       }
-      increment_short_link_click: { Args: { _code: string }; Returns: string }
+      lookup_bookings: {
+        Args: { _q: string }
+        Returns: {
+          date: string
+          end_time: string
+          start_time: string
+          status: string
+          subject: string
+          teacher_name: string
+        }[]
+      }
     }
     Enums: {
       app_role: "admin" | "user"
