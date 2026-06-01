@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { useServerFn } from "@tanstack/react-start";
 import type { User } from "@supabase/supabase-js";
 import { getMyAdminAccess } from "@/lib/admin-auth.functions";
@@ -33,16 +32,26 @@ export function useAuth() {
       }
     };
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setLoading(true);
-      setTimeout(() => void syncAuth(session?.user ?? null), 0);
+    let unsubscribe = () => {};
+
+    import("@/integrations/supabase/client").then(({ supabase }) => {
+      if (!active) return;
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        setLoading(true);
+        setTimeout(() => void syncAuth(session?.user ?? null), 0);
+      });
+      unsubscribe = () => subscription.unsubscribe();
+
+      supabase.auth.getUser().then(({ data, error }) => {
+        void syncAuth(error ? null : data.user);
+      });
     });
 
-    supabase.auth.getUser().then(({ data, error }) => {
-      void syncAuth(error ? null : data.user);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      active = false;
+      unsubscribe();
+    };
   }, [checkAdminAccess]);
 
   return { user, isAdmin, loading };
