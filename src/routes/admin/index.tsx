@@ -1,6 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { SiteLayout } from "@/components/SiteLayout";
 import { PageHeader } from "@/components/PageHeader";
@@ -27,6 +26,7 @@ function AdminLogin() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setBusy(true);
+    const { supabase } = await import("@/integrations/supabase/client");
     if (mode === "signin") {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       setBusy(false);
