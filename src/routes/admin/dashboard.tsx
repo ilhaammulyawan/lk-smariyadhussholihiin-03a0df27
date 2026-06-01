@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate, Outlet, Link, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { LogOut, LayoutDashboard, CalendarCheck, ClipboardList, FileText, Newspaper, Settings, CalendarX, Users, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -51,7 +50,7 @@ function AdminShell() {
           })}
         </nav>
         <div className="mt-auto pt-6">
-          <Button variant="ghost" size="sm" className="w-full justify-start" onClick={async () => { await supabase.auth.signOut(); nav({ to: "/admin" }); }}>
+          <Button variant="ghost" size="sm" className="w-full justify-start" onClick={async () => { const { supabase } = await import("@/integrations/supabase/client"); await supabase.auth.signOut(); nav({ to: "/admin" }); }}>
             <LogOut className="size-4 mr-2" /> Keluar
           </Button>
         </div>
