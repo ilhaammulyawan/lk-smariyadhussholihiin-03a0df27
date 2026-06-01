@@ -18,7 +18,6 @@ import { Route as InformasiRouteImport } from './routes/informasi'
 import { Route as CekStatusRouteImport } from './routes/cek-status'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SIndexRouteImport } from './routes/s.index'
 import { Route as BeritaIndexRouteImport } from './routes/berita/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as SCodeRouteImport } from './routes/s.$code'
@@ -76,11 +75,6 @@ const BookingRoute = BookingRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SIndexRoute = SIndexRouteImport.update({
-  id: '/s/',
-  path: '/s/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BeritaIndexRoute = BeritaIndexRouteImport.update({
@@ -165,7 +159,6 @@ export interface FileRoutesByFullPath {
   '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
-  '/s/': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -189,7 +182,6 @@ export interface FileRoutesByTo {
   '/s/$code': typeof SCodeRoute
   '/admin': typeof AdminIndexRoute
   '/berita': typeof BeritaIndexRoute
-  '/s': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -215,7 +207,6 @@ export interface FileRoutesById {
   '/s/$code': typeof SCodeRoute
   '/admin/': typeof AdminIndexRoute
   '/berita/': typeof BeritaIndexRoute
-  '/s/': typeof SIndexRoute
   '/admin/dashboard/berita': typeof AdminDashboardBeritaRoute
   '/admin/dashboard/booking': typeof AdminDashboardBookingRoute
   '/admin/dashboard/jadwal': typeof AdminDashboardJadwalRoute
@@ -242,7 +233,6 @@ export interface FileRouteTypes {
     | '/s/$code'
     | '/admin/'
     | '/berita/'
-    | '/s/'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -266,7 +256,6 @@ export interface FileRouteTypes {
     | '/s/$code'
     | '/admin'
     | '/berita'
-    | '/s'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -291,7 +280,6 @@ export interface FileRouteTypes {
     | '/s/$code'
     | '/admin/'
     | '/berita/'
-    | '/s/'
     | '/admin/dashboard/berita'
     | '/admin/dashboard/booking'
     | '/admin/dashboard/jadwal'
@@ -317,7 +305,6 @@ export interface RootRouteChildren {
   SCodeRoute: typeof SCodeRoute
   AdminIndexRoute: typeof AdminIndexRoute
   BeritaIndexRoute: typeof BeritaIndexRoute
-  SIndexRoute: typeof SIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -383,13 +370,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/s/': {
-      id: '/s/'
-      path: '/s'
-      fullPath: '/s/'
-      preLoaderRoute: typeof SIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/berita/': {
@@ -527,8 +507,17 @@ const rootRouteChildren: RootRouteChildren = {
   SCodeRoute: SCodeRoute,
   AdminIndexRoute: AdminIndexRoute,
   BeritaIndexRoute: BeritaIndexRoute,
-  SIndexRoute: SIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
