@@ -112,7 +112,7 @@ function Booking() {
       `📚 ${form.subject}%0A👥 ${form.student_count} siswa%0A📱 ${form.teacher_wa}%0A` +
       `Mohon konfirmasinya. Terima kasih.`;
     setTimeout(() => {
-      window.location.href = `https://wa.me/${adminWa}?text=${msg}`;
+      window.location.href = `https://wa.me/${adminWa ?? ""}?text=${msg}`;
     }, 800);
   };
 
