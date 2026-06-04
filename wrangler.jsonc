@@ -1,7 +1,12 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
+  "name": "lk-smariyadhussholihiin-03a0df27",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "src/server.ts"
+  "main": "src/server.ts",
+  "alias": {
+    "#tanstack-router-entry": "./.tanstack/router/entry.client.tsx",
+    "#tanstack-start-entry": "./.tanstack/router/entry.server.tsx",
+    "#tanstack-start-plugin-adapters": "./node_modules/@tanstack/start/dist/esm/plugin-adapters.js"
+  }
 }
