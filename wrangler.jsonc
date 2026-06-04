@@ -7,6 +7,8 @@
   "alias": {
     "#tanstack-router-entry": "./.tanstack/router/entry.client.tsx",
     "#tanstack-start-entry": "./.tanstack/router/entry.server.tsx",
-    "#tanstack-start-plugin-adapters": "./node_modules/@tanstack/start/dist/esm/plugin-adapters.js"
+    "#tanstack-start-plugin-adapters": "./node_modules/@tanstack/start/dist/esm/plugin-adapters.js",
+    "tanstack-start-manifest:v": "./dist/server/assets/_tanstack-start-manifest_v-CrkV4JVA.js",
+    "tanstack-start-injected-head-scripts:v": "./node_modules/@tanstack/start/dist/esm/injected-head-scripts.js"
   }
 }
