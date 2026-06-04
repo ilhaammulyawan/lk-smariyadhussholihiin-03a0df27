@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import type { User } from "@supabase/supabase-js";
-import { getMyAdminAccess } from "@/lib/admin-auth.functions";
 
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const checkAdminAccess = useServerFn(getMyAdminAccess);
 
   useEffect(() => {
     let active = true;
@@ -23,8 +20,14 @@ export function useAuth() {
       }
 
       try {
-        const result = await checkAdminAccess();
-        if (active) setIsAdmin(result.isAdmin);
+        const { supabase } = await import("@/integrations/supabase/client");
+        const { data, error } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", nextUser.id)
+          .eq("role", "admin")
+          .maybeSingle();
+        if (active) setIsAdmin(!error && data?.role === "admin");
       } catch {
         if (active) setIsAdmin(false);
       } finally {
@@ -52,7 +55,7 @@ export function useAuth() {
       active = false;
       unsubscribe();
     };
-  }, [checkAdminAccess]);
+  }, []);
 
   return { user, isAdmin, loading };
 }
