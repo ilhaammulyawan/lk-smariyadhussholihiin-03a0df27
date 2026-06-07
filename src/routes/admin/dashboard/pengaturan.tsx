@@ -27,6 +27,9 @@ const FIELDS: { key: string; label: string; multi?: boolean }[] = [
   { key: "materi_url", label: "URL Portal Materi (cth: https://informatika.pages.dev)" },
   { key: "materi_title", label: "Judul Kartu Materi" },
   { key: "materi_desc", label: "Deskripsi Kartu Materi", multi: true },
+  { key: "credits_text", label: "Teks Credits Footer (cth: Build by)", multi: true },
+  { key: "credits_link_label", label: "Label Link Credits (cth: Mulyawan)" },
+  { key: "credits_link_url", label: "URL Link Credits (cth: https://mulyawan.biz.id)" },
 ];
 
 function AdminPengaturan() {

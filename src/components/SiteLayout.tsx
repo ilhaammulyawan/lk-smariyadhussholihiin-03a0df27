@@ -2,6 +2,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ReactNode, useState } from "react";
 import { Menu, X, Monitor, Mail, MessageCircle, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSettings } from "@/lib/settings";
 
 const NAV = [
   { to: "/", label: "Beranda" },
@@ -19,6 +21,10 @@ const NAV = [
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { data: settings } = useQuery({ queryKey: ["settings"], queryFn: fetchSettings });
+  const creditsText = settings?.credits_text ?? "Dibuat oleh Guru Informatika dengan ❤️ untuk santri.";
+  const creditsLinkLabel = settings?.credits_link_label ?? "";
+  const creditsLinkUrl = settings?.credits_link_url ?? "";
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -146,7 +152,21 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="border-t border-border">
             <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground text-center">
-              &copy; {new Date().getFullYear()} Lab Komputer SMA Riyadhussholihiin. Dibuat oleh Guru Informatika dengan <span className="text-rose-500">❤️</span> untuk santri.
+              &copy; {new Date().getFullYear()} Lab Komputer SMA Riyadhussholihiin.{" "}
+              {creditsText}
+              {creditsLinkLabel && creditsLinkUrl && (
+                <>
+                  {" "}
+                  <a
+                    href={creditsLinkUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-brand hover:underline font-medium"
+                  >
+                    {creditsLinkLabel}
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
