@@ -2,6 +2,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ReactNode, useState } from "react";
 import { Menu, X, Monitor, Mail, MessageCircle, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
+import { fetchSettings } from "@/lib/settings";
 
 const NAV = [
   { to: "/", label: "Beranda" },
