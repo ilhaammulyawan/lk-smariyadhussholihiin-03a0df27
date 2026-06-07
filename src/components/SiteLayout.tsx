@@ -21,6 +21,10 @@ const NAV = [
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const path = useRouterState({ select: (s) => s.location.pathname });
+  const { data: settings } = useQuery({ queryKey: ["settings"], queryFn: fetchSettings });
+  const creditsText = settings?.credits_text ?? "Dibuat oleh Guru Informatika dengan ❤️ untuk santri.";
+  const creditsLinkLabel = settings?.credits_link_label ?? "";
+  const creditsLinkUrl = settings?.credits_link_url ?? "";
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
