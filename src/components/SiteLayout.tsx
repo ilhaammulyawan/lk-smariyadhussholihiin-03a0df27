@@ -152,7 +152,21 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="border-t border-border">
             <div className="max-w-7xl mx-auto px-6 py-6 text-xs text-muted-foreground text-center">
-              &copy; {new Date().getFullYear()} Lab Komputer SMA Riyadhussholihiin. Dibuat oleh Guru Informatika dengan <span className="text-rose-500">❤️</span> untuk santri.
+              &copy; {new Date().getFullYear()} Lab Komputer SMA Riyadhussholihiin.{" "}
+              {creditsText}
+              {creditsLinkLabel && creditsLinkUrl && (
+                <>
+                  {" "}
+                  <a
+                    href={creditsLinkUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-brand hover:underline font-medium"
+                  >
+                    {creditsLinkLabel}
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>
