@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
+import { DEFAULT_PERATURAN, parsePeraturanContent } from "@/lib/peraturan-content";
 
 export const Route = createFileRoute("/admin/dashboard/konten")({ component: AdminKonten });
 
