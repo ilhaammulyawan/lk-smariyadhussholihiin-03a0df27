@@ -22,12 +22,76 @@ function AdminKonten() {
         <TabsList>
           <TabsTrigger value="staff">Pengurus</TabsTrigger>
           <TabsTrigger value="lab_info">Info Lab</TabsTrigger>
-          <TabsTrigger value="regulations">Peraturan</TabsTrigger>
+          <TabsTrigger value="regulations">Peraturan (list)</TabsTrigger>
+          <TabsTrigger value="peraturan_page">Halaman /peraturan</TabsTrigger>
         </TabsList>
         <TabsContent value="staff" className="mt-6"><StaffEditor /></TabsContent>
         <TabsContent value="lab_info" className="mt-6"><GenericEditor table="lab_info" fields={["category", "title", "content"]} /></TabsContent>
         <TabsContent value="regulations" className="mt-6"><GenericEditor table="regulations" fields={["type", "title", "content"]} /></TabsContent>
+        <TabsContent value="peraturan_page" className="mt-6"><PeraturanPageEditor /></TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+function PeraturanPageEditor() {
+  const qc = useQueryClient();
+  const [text, setText] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.from("settings").select("value").eq("key", "peraturan_content").maybeSingle();
+      const parsed = parsePeraturanContent(data?.value);
+      setText(JSON.stringify(parsed, null, 2));
+      setLoading(false);
+    })();
+  }, []);
+
+  const save = async () => {
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch (e: any) {
+      return toast.error("JSON tidak valid: " + e.message);
+    }
+    setSaving(true);
+    const value = JSON.stringify(parsed);
+    const { data: existing } = await supabase.from("settings").select("id").eq("key", "peraturan_content").maybeSingle();
+    const res = existing
+      ? await supabase.from("settings").update({ value }).eq("id", existing.id)
+      : await supabase.from("settings").insert({ key: "peraturan_content", value });
+    setSaving(false);
+    if (res.error) return toast.error(res.error.message);
+    toast.success("Konten /peraturan disimpan");
+    qc.invalidateQueries({ queryKey: ["peraturan-content"] });
+  };
+
+  const reset = () => {
+    if (!confirm("Kembalikan ke konten default? Perubahan yang belum disimpan akan hilang.")) return;
+    setText(JSON.stringify(DEFAULT_PERATURAN, null, 2));
+  };
+
+  return (
+    <div className="grid gap-4">
+      <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-900">
+        <strong>Format JSON.</strong> Edit teks di bawah untuk mengubah hero, kartu peraturan, tabel sistem poin, timeline eskalasi, dan tanda tangan halaman <code>/peraturan</code>.
+        Nilai <code>icon</code> yang tersedia: <code>Heart, Monitor, ShieldAlert, Lock, Wrench, AlertTriangle, CheckCircle2, XCircle, Bell, BookOpen, Users, Server, Wifi, Trash2</code>.
+        Nilai <code>tier</code>: <code>warn | danger | critical</code>. Nilai <code>tone</code>: <code>green | orange | red</code>.
+      </div>
+      <Textarea
+        value={loading ? "Memuat..." : text}
+        onChange={(e) => setText(e.target.value)}
+        disabled={loading}
+        rows={30}
+        className="font-mono text-xs"
+        spellCheck={false}
+      />
+      <div className="flex gap-2">
+        <Button onClick={save} disabled={loading || saving}>{saving ? "Menyimpan..." : "Simpan"}</Button>
+        <Button variant="ghost" onClick={reset} disabled={loading}>Reset ke Default</Button>
+      </div>
     </div>
   );
 }
