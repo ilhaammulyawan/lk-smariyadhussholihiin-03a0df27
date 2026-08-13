@@ -62,9 +62,10 @@
   --input: oklch(0.18 0.02 265 / 14%);
   --ring: oklch(0.55 0.18 265);
 
-  --brand: oklch(0.55 0.18 265);
+  --brand: oklch(0.62 0.20 262);
   --brand-foreground: oklch(0.99 0 0);
-  --accent2: oklch(0.62 0.14 225);
+  --accent2: oklch(0.55 0.14 230);
+
 }
 
 @layer base {
