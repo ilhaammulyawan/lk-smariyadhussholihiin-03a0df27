@@ -21,7 +21,7 @@ import { Separator } from "@/components/ui/separator";
 export const Route = createFileRoute("/admin/dashboard")({ component: AdminShell });
 
 const TOP_ITEMS = [
-  { to: "/admin/dashboard", label: "Beranda", icon: LayoutDashboard, exact: true },
+  { to: "/admin/dashboard", label: "Beranda", icon: LayoutDashboard },
   { to: "/admin/dashboard/booking", label: "Booking", icon: CalendarCheck },
   { to: "/admin/dashboard/laporan", label: "Laporan", icon: ClipboardList },
   { to: "/admin/dashboard/jadwal", label: "Jadwal & Libur", icon: CalendarX },
@@ -33,6 +33,10 @@ const MORE_ITEMS = [
   { to: "/admin/dashboard/konten", label: "Konten", icon: FileText },
   { to: "/admin/dashboard/pengaturan", label: "Pengaturan", icon: Settings },
 ];
+
+function isActive(path: string, to: string) {
+  return to === "/admin/dashboard" ? path === to : path.startsWith(to);
+}
 
 function AdminShell() {
   const { user, isAdmin, loading } = useAuth();
@@ -63,7 +67,7 @@ function AdminShell() {
 
       <nav className="flex flex-col gap-1">
         {TOP_ITEMS.map((it) => {
-          const active = it.exact ? path === it.to : path.startsWith(it.to);
+          const active = isActive(path, it.to);
           return (
             <Link
               key={it.to}
@@ -85,7 +89,7 @@ function AdminShell() {
         <Separator className="my-3 bg-border/60" />
 
         {MORE_ITEMS.map((it) => {
-          const active = it.exact ? path === it.to : path.startsWith(it.to);
+          const active = isActive(path, it.to);
           return (
             <Link
               key={it.to}
